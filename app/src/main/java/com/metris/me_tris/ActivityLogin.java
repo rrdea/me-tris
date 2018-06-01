@@ -3,6 +3,7 @@ package com.metris.me_tris;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -61,6 +62,7 @@ public class ActivityLogin extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView tvDaftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,15 @@ public class ActivityLogin extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        tvDaftar = findViewById(R.id.textviewLogin_daftar);
+        tvDaftar.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ActivityLogin.this, ActivityDaftarAkun.class));
+                finish();
+            }
+        });
     }
 
     private void populateAutoComplete() {

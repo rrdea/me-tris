@@ -1,15 +1,18 @@
 package com.metris.me_tris;
 
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ActivityBeranda extends AppCompatActivity {
-
+public class FragmentBeranda extends Fragment {
+    View view;
     private Timer timer;
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
@@ -17,14 +20,18 @@ public class ActivityBeranda extends AppCompatActivity {
 
     private int gambars[] = {
             R.drawable.sampul_tigawarna, R.drawable.sampul_goacina, R.drawable.sampul_balekambang
-            };
+    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_beranda);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_beranda, container, false);
+        return view;
+    }
 
-        viewPager = (ViewPager)findViewById(R.id.viewPagerDestinasi);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewPager = (ViewPager)getActivity().findViewById(R.id.viewPagerDestinasi);
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(View view, float position) {
@@ -42,7 +49,7 @@ public class ActivityBeranda extends AppCompatActivity {
                 }
             }
         });
-        viewPagerAdapter = new ViewPagerAdapter(this, gambars);
+        viewPagerAdapter = new ViewPagerAdapter(getActivity(), gambars);
         viewPager.setAdapter(viewPagerAdapter);
 
         TimerTask timerTask = new TimerTask() {
@@ -63,12 +70,7 @@ public class ActivityBeranda extends AppCompatActivity {
         };
         timer = new Timer();
         timer.schedule(timerTask, 6000, 6000);
-
     }
 
-    @Override
-    protected void onDestroy() {
-        timer.cancel();
-        super.onDestroy();
-    }
+
 }

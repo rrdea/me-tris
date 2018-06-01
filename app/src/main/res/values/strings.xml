@@ -20,5 +20,12 @@
     </string>
     <string name="title_activity_lupa_password">ActivityLupaPassword</string>
     <string name="title_activity_daftar_akun">Daftar Akun</string>
+    <string name="_0812345678">0812345678</string>
+    <string name="masukkan_6_digit_kode">Masukkan 6 digit kode</string>
+    <string name="verifikasi">Verifikasi</string>
+    <string name="tidak_menerima_kode">Tidak Menerima Kode?</string>
+    <string name="tunggu_beberapa_menit_atau_telpon_saya">Tunggu Beberapa Menit atau Telpon saya</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
 
 </resources>

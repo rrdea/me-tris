@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,12 +14,11 @@ public class ActivityBeranda extends AppCompatActivity {
     private Timer timer;
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    private final int NUM_PAGES = 2;
+    private final int NUM_PAGES = 3;
 
-    private String gambars[] = {
-            "https://3.bp.blogspot.com/-79bvqkxoilM/WgWnsejwYCI/AAAAAAAAAgw/aEC86BU9Xd8Fax97SBSn3s2476aSoWr_gCPcBGAYYCw/s1600/d68dcd917e03da9cf85d1a8b21fa5654-compressed.jpg",
-            "https://1.bp.blogspot.com/-M2yZAmQJGvI/WgWRu7JWbEI/AAAAAAAAAgM/K2DxKEuOEIkpS6pY7sIlvP0sdYB9zA2HACLcBGAs/s1600/pantai-3-warna-malang-by-innokribow-compressed.jpg"
-    };
+    private int gambars[] = {
+            R.drawable.sampul_tigawarna, R.drawable.sampul_goacina, R.drawable.sampul_balekambang
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,23 @@ public class ActivityBeranda extends AppCompatActivity {
         setContentView(R.layout.activity_beranda);
 
         viewPager = (ViewPager)findViewById(R.id.viewPagerDestinasi);
+        viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
+            @Override
+            public void transformPage(View view, float position) {
+                // do transformation here
+                if(position <= -1.0F || position >= 1.0F) {
+                    view.setTranslationX(view.getWidth() * position);
+                    view.setAlpha(0.0F);
+                } else if( position == 0.0F ) {
+                    view.setTranslationX(view.getWidth() * position);
+                    view.setAlpha(1.0F);
+                } else {
+                    // position is between -1.0F & 0.0F OR 0.0F & 1.0F
+                    view.setTranslationX(view.getWidth() * -position);
+                    view.setAlpha(1.0F - Math.abs(position));
+                }
+            }
+        });
         viewPagerAdapter = new ViewPagerAdapter(this, gambars);
         viewPager.setAdapter(viewPagerAdapter);
 
@@ -46,7 +63,7 @@ public class ActivityBeranda extends AppCompatActivity {
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 3000, 3000);
+        timer.schedule(timerTask, 6000, 6000);
 
     }
 

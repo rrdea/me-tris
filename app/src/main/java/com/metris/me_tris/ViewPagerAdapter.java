@@ -16,10 +16,10 @@ import com.squareup.picasso.Picasso;
 public class ViewPagerAdapter extends PagerAdapter{
 
     private Activity activity;
-    private String[] gambars;
+    private int[] gambars;
     private LayoutInflater inflater;
 
-    public ViewPagerAdapter(Activity activity, String[] gambar) {
+    public ViewPagerAdapter(Activity activity, int[] gambar) {
         this.activity = activity;
         this.gambars = gambar;
     }
@@ -38,27 +38,13 @@ public class ViewPagerAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         inflater = (LayoutInflater)activity.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.viewpager_item, container,false);
+        View viewItem = inflater.inflate(R.layout.viewpager_item, container,false);
 
-        ImageView gambar;
-        gambar = (ImageView)itemView.findViewById(R.id.iv_slider_destinasi);
-        DisplayMetrics dis = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dis);
-        int height = dis.heightPixels;
-        int width = dis.widthPixels;
-        gambar.setMinimumHeight(height);
-        gambar.setMinimumWidth(width);
+        ImageView imageView = (ImageView) viewItem.findViewById(R.id.iv_slider_destinasi);
+        imageView.setImageResource(gambars[position]);
+        ((ViewPager)container).addView(viewItem);
 
-        try{
-            Picasso.with(activity.getApplicationContext())
-                    .load(gambars[position])
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
-                    .into(gambar);
-        } catch (Exception ex){}
-
-        container.addView(itemView);
-        return itemView;
+        return viewItem;
 
     }
 

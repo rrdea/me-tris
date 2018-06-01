@@ -30,6 +30,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +61,14 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView editTextEmailView;
+    private EditText editTextPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private Button buttonDaftar;
+
     private TextView tvLogin;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -70,11 +76,11 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_akun);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        editTextEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        editTextPasswordView = (EditText) findViewById(R.id.password);
+        editTextPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -104,6 +110,35 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
                 finish();
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
+
+        buttonDaftar = findViewById(R.id.buuton_daftar);
+        buttonDaftar.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
+
+    }
+
+    private void registerUser()
+    {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser user)
+    {
+
     }
 
     private void populateAutoComplete() {
@@ -122,7 +157,7 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(editTextEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -161,31 +196,31 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
         }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        editTextEmailView.setError(null);
+        editTextPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = editTextEmailView.getText().toString();
+        String password = editTextPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            editTextPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = editTextPasswordView;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            editTextEmailView.setError(getString(R.string.error_field_required));
+            focusView = editTextEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            editTextEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = editTextEmailView;
             cancel = true;
         }
 
@@ -288,7 +323,7 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
                 new ArrayAdapter<>(ActivityDaftarAkun.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        editTextEmailView.setAdapter(adapter);
     }
 
 
@@ -347,8 +382,8 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                editTextPasswordView.setError(getString(R.string.error_incorrect_password));
+                editTextPasswordView.requestFocus();
             }
         }
 

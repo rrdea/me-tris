@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "288491237871-4m0gvcvf9200vc9dgg5m9l1hkp44tlkp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.metris.me_tris",
+            "certificate_hash": "fefccf1b95ed0b67981b53fd2c597fcaf010f65f"
+          }
+        },
+        {
           "client_id": "288491237871-k0tfqtvkls5ogbvbjf9fp08mdcacr5i1.apps.googleusercontent.com",
           "client_type": 3
         },
@@ -33,8 +41,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288491237871-k0tfqtvkls5ogbvbjf9fp08mdcacr5i1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

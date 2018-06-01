@@ -11,6 +11,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ActivityLogin">
 
+    <LinearLayout
+        android:id="@+id/login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Tempatnya Logo"/>
+
+    </LinearLayout>
+
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -30,19 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/login_logo"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Tempatnya Logo"/>
-
-            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -103,7 +103,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Daftar"
-                    android:textStyle=""
                     />
 
             </LinearLayout>

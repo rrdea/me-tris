@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ public class FragmentBeranda extends Fragment {
     private Timer timer;
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    private final int NUM_PAGES = 3;
+    private final int NUM_PAGES = 7;
+    private boolean reverse = false;
 
     private int gambars[] = {
-            R.drawable.sampul_tigawarna, R.drawable.sampul_goacina, R.drawable.sampul_balekambang
+            R.drawable.sampul_tigawarna, R.drawable.sampul_bangsring, R.drawable.sampul_cemara, R.drawable.sampul_gilinoko,
+            R.drawable.sampul_lenggoksono, R.drawable.sampul_panggul, R.drawable.sampul_watulimo
     };
 
     @Override
@@ -59,17 +62,27 @@ public class FragmentBeranda extends Fragment {
 
                     @Override
                     public void run() {
-                        if(viewPager.getCurrentItem() == NUM_PAGES - 1){
-                            viewPager.setCurrentItem(0);
+                        if(reverse){
+                            if(viewPager.getCurrentItem() == 0){
+                                reverse = false;
+                                viewPager.setCurrentItem(1);
+                            } else {
+                                viewPager.setCurrentItem((viewPager.getCurrentItem()-1));
+                            }
                         } else {
-                            viewPager.setCurrentItem((viewPager.getCurrentItem()+1));
+                            if(viewPager.getCurrentItem() == NUM_PAGES-1){
+                                reverse = true;
+                                viewPager.setCurrentItem(NUM_PAGES-2);
+                            } else {
+                                viewPager.setCurrentItem((viewPager.getCurrentItem()+1));
+                            }
                         }
                     }
                 });
             }
         };
         timer = new Timer();
-        timer.schedule(timerTask, 6000, 6000);
+        timer.schedule(timerTask, 9000, 9000);
     }
 
 

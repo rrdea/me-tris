@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ActivityBeranda">
+    android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPagerDestinasi"
@@ -14,17 +13,32 @@
     </android.support.v4.view.ViewPager>
 
     <Button
-        android:background="@android:color/transparent"
         android:id="@+id/beranda_ib_pesan"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="32dp"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_tiket"
+        android:text="Pesan Tiket"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/viewPagerDestinasi"
+        app:layout_constraintStart_toStartOf="@+id/viewPagerDestinasi" />
+
+    <Button
+        android:id="@+id/beranda_ib_paket"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:drawableTop="@drawable/ic_pesan"
-        android:text="Pesan Tiket"
+        android:background="@android:color/transparent"
+        android:drawableTop="@drawable/ic_paket"
+        android:text="Lihat Paket"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/viewPagerDestinasi"
         app:layout_constraintEnd_toEndOf="@+id/viewPagerDestinasi"
-        app:layout_constraintStart_toStartOf="@+id/viewPagerDestinasi" />
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/beranda_ib_pesan" />
 
 </android.support.constraint.ConstraintLayout>

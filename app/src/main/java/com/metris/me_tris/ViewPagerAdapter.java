@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 public class ViewPagerAdapter extends PagerAdapter{
 
     private Activity activity;

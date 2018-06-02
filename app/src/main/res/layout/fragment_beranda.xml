@@ -17,7 +17,7 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginBottom="32dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
         android:drawableTop="@drawable/ic_tiket"
         android:text="Pesan Tiket"
@@ -38,7 +38,7 @@
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/viewPagerDestinasi"
         app:layout_constraintEnd_toEndOf="@+id/viewPagerDestinasi"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.307"
         app:layout_constraintStart_toEndOf="@+id/beranda_ib_pesan" />
 
 </android.support.constraint.ConstraintLayout>

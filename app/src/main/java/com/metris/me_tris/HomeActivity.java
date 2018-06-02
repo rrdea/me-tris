@@ -18,14 +18,17 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_beranda:
                     loadFragment(new FragmentBeranda());
                     return true;
-                case R.id.navigation_dashboard:
-                    //mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_tripsaya:
+                    //loadFragment(new FragmentTrip());
                     return true;
-                case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_akunsaya:
+                    //loadFragment(new FragmentAkun());
+                    return true;
+                case R.id.navigation_lainnya:
+                    loadFragment(new FragmentLainnya());
                     return true;
             }
             return false;

@@ -15,24 +15,25 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
     <string name="title_activity_lupa_password">ActivityLupaPassword</string>
     <string name="title_activity_daftar_akun">Daftar Akun</string>
-<<<<<<< HEAD
+
     <string name="_0812345678">0812345678</string>
     <string name="masukkan_6_digit_kode">Masukkan 6 digit kode</string>
     <string name="verifikasi">Verifikasi</string>
     <string name="tidak_menerima_kode">Tidak Menerima Kode?</string>
     <string name="tunggu_beberapa_menit_atau_telpon_saya">Tunggu Beberapa Menit atau Telpon saya</string>
     <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
-=======
+
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
->>>>>>> 6fe6468a926936b8749f4fa80190b6b10cf1178c
+
+    <string name="nav_beranda">Beranda</string>
+    <string name="nav_tripsaya">Trip Saya</string>
+    <string name="nav_akunsaya">Akun</string>
+    <string name="nav_lainnya">Lainnya</string>
 
 </resources>

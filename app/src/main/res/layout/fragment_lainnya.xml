@@ -1,67 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white_opaque"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/title_fragment_lainnya"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="12pt"
+        android:verticalScrollbarPosition="defaultPosition" />
 
-        <Button
-            android:id="@+id/bahasa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:layout_marginLeft="5pt"
-            android:text="Bahasa"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/bantuan"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:layout_marginLeft="5pt"
-            android:text="Bantuan"
-            android:textAlignment="textStart"
-            android:textAllCaps="false" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/tentang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:layout_marginLeft="5pt"
-            android:text="Tentang"
-            android:textAlignment="textStart"
-            android:textAllCaps="false" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-        <Button
-            android:id="@+id/hub"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:layout_marginLeft="5pt"
-            android:text="Hubungi Kami"
-            android:textAlignment="textStart"
-            android:textAllCaps="false" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical">
 
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:layout_marginLeft="5pt"
-            android:text="Logout"
-            android:textAlignment="textStart"
-            android:textAllCaps="false" />
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="informasi"
+                        android:textAllCaps="true"
+                        android:textSize="6pt" />
+
+                    <Button
+                        android:id="@+id/btn_lainnya_bantuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/listbutton"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/ic_bantuan"
+                        android:text="Bantuan"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gray"
+                        android:typeface="sans"
+                        android:textSize="9pt" />
+
+                    <Button
+                        android:id="@+id/btn_lainnya_hubungi"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/listbutton"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/ic_hubungi"
+                        android:text="Hubungi Kami"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gray"
+                        android:typeface="sans"
+                        android:textSize="9pt" />
+
+                    <Button
+                        android:id="@+id/btn_lainnya_ubahbahasa"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/listbutton"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/ic_ubahbahasa"
+                        android:text="Ubah Bahasa"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gray"
+                        android:typeface="sans"
+                        android:textSize="9pt" />
+
+                    <Button
+                        android:id="@+id/btn_lainnya_tentang"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/listbutton"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/ic_tentang"
+                        android:text="Tentang"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gray"
+                        android:typeface="sans"
+                        android:textSize="9pt" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Akun saya"
+                        android:textAllCaps="true"
+                        android:textSize="6pt" />
+
+                    <Button
+                        android:id="@+id/btn_lainnya_keluar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/listbutton"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/ic_keluar"
+                        android:text="Keluar"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gray"
+                        android:typeface="sans"
+                        android:textSize="9pt" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aplikasi"
+                        android:textAllCaps="true"
+                        android:textSize="6pt" />
+
+                    <Button
+                        android:id="@+id/btn_lainnya_tutup"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/listbutton"
+                        android:drawablePadding="20dp"
+                        android:drawableStart="@drawable/ic_tutup"
+                        android:text="Tutup"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="@color/gray"
+                        android:typeface="sans"
+                        android:textSize="9pt" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

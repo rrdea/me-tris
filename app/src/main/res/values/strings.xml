@@ -27,13 +27,13 @@
     <string name="todo">TODO</string>
 
     <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
     <string name="nav_beranda">Beranda</string>
     <string name="nav_tripsaya">Trip Saya</string>
+    <string name="nav_pakettrip">Paket Trip</string>
     <string name="nav_akunsaya">Akun</string>
     <string name="nav_lainnya">Lainnya</string>
+
+    <string name="title_fragment_lainnya">Lainnya</string>
 
 </resources>

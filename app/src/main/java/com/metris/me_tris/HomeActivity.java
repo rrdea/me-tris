@@ -24,6 +24,9 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_tripsaya:
                     //loadFragment(new FragmentTrip());
                     return true;
+                case R.id.navigation_pakettrip:
+                    //loadFragment(new FragmentPaket());
+                    return true;
                 case R.id.navigation_akunsaya:
                     //loadFragment(new FragmentAkun());
                     return true;
@@ -42,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.navigation_beranda);
 
         loadFragment(new FragmentBeranda());
     }

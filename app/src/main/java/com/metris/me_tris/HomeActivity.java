@@ -1,14 +1,15 @@
 package com.metris.me_tris;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
                     loadFragment(new FragmentBeranda());
                     return true;
                 case R.id.navigation_tripsaya:
-                    //loadFragment(new FragmentTrip());
+                    loadFragment(new FragmentTrip());
                     return true;
                 case R.id.navigation_pakettrip:
                     //loadFragment(new FragmentPaket());
@@ -53,8 +54,7 @@ public class HomeActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
 
         // create a FragmentManager
-        FragmentManager fm = getFragmentManager();
-
+        FragmentManager fm = getSupportFragmentManager();
 
         // create a FragmentTransaction to begin the transaction and replace the Fragment
         FragmentTransaction fragmentTransaction = fm.beginTransaction();

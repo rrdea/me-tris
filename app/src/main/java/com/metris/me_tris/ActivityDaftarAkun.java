@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,6 +36,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -62,7 +64,11 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
 
     // UI references.
     private AutoCompleteTextView editTextEmailView;
+    private AutoCompleteTextView editTextNomorTelepon;
+    private AutoCompleteTextView editTextUsername;
     private EditText editTextPasswordView;
+    private EditText editTextPasswordValidation;
+
     private View mProgressView;
     private View mLoginFormView;
     private Button buttonDaftar;
@@ -77,32 +83,28 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
         setContentView(R.layout.activity_daftar_akun);
         // Set up the login form.
         editTextEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
-
         editTextPasswordView = (EditText) findViewById(R.id.password);
+        editTextPasswordValidation = (EditText) findViewById(R.id.validate_password);
+        editTextUsername =(AutoCompleteTextView) findViewById(R.id.username);
+        buttonDaftar = (Button) findViewById(R.id.buton_daftar);
+        tvLogin = findViewById(R.id.textviewDaftar_login);
+
+        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        populateAutoComplete();
         editTextPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
                     return true;
                 }
                 return false;
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
-
-        tvLogin = findViewById(R.id.textviewDaftar_login);
         tvLogin.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -111,9 +113,6 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-
-        buttonDaftar = findViewById(R.id.buuton_daftar);
         buttonDaftar.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -125,6 +124,54 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
 
     private void registerUser()
     {
+        String username = editTextUsername.getText().toString().trim();
+        String email = editTextEmailView.getText().toString().trim();
+        String password = editTextPasswordView.getText().toString().trim();
+        String passwordVal = editTextPasswordValidation.getText().toString().trim();
+
+        if ( email.isEmpty() )
+        {
+            editTextEmailView.setError("Masukkan Email");
+            editTextEmailView.requestFocus();
+            return;
+        }
+        if ( username.isEmpty() )
+        {
+            editTextUsername.setError("Masukkan nama");
+            editTextUsername.requestFocus();
+            return;
+        }
+        if ( password.isEmpty() )
+        {
+            editTextPasswordView.setError("Masukkan password");
+            editTextPasswordView.requestFocus();
+            return;
+        }
+        if ( passwordVal.isEmpty() )
+        {
+            editTextPasswordValidation.setError("Masukkan validasi password");
+            editTextPasswordValidation.requestFocus();
+            return;
+        }
+        if ( !Patterns.EMAIL_ADDRESS.matcher(email).matches() )
+        {
+            editTextEmailView.setError("Format email salah");
+            editTextEmailView.requestFocus();
+            return;
+        }
+        if ( password.length() < 6 )
+        {
+            editTextPasswordView.setError("Password minimal 6 karakter");
+            editTextPasswordView.requestFocus();
+            return;
+        }
+        if ( !password.equals(passwordVal) )
+        {
+            editTextPasswordValidation.setError("Password dan validasi password tidak sama");
+            editTextPasswordValidation.requestFocus();
+            return;
+        }
+
 
     }
 
@@ -181,59 +228,6 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
             }
-        }
-    }
-
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
-
-        // Reset errors.
-        editTextEmailView.setError(null);
-        editTextPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = editTextEmailView.getText().toString();
-        String password = editTextPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            editTextPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = editTextPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            editTextEmailView.setError(getString(R.string.error_field_required));
-            focusView = editTextEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            editTextEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = editTextEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
         }
     }
 

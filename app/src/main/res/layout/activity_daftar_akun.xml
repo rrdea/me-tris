@@ -11,14 +11,7 @@
     android:paddingTop="0dp"
     tools:context=".ActivityDaftarAkun">
 
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/daftar_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
+    <!-- signup progress -->
 
     <LinearLayout
         android:id="@+id/login_logo"
@@ -149,6 +142,15 @@
                     />
 
             </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/daftar_progress"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                android:layout_gravity="center"/>
 
         </LinearLayout>
     </ScrollView>

@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,9 +30,15 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
@@ -43,7 +50,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class ActivityDaftarAkun extends AppCompatActivity {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -57,20 +64,14 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView editTextEmailView;
-    private AutoCompleteTextView editTextNomorTelepon;
     private AutoCompleteTextView editTextUsername;
     private EditText editTextPasswordView;
     private EditText editTextPasswordValidation;
 
-    private View mProgressView;
-    private View mLoginFormView;
+    private ProgressBar progressBar;
     private Button buttonDaftar;
 
     private TextView tvLogin;
@@ -89,8 +90,7 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
         buttonDaftar = (Button) findViewById(R.id.buton_daftar);
         tvLogin = findViewById(R.id.textviewDaftar_login);
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        progressBar = findViewById(R.id.daftar_progress);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -108,8 +108,7 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
         tvLogin.setOnClickListener(new TextView.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ActivityDaftarAkun.this, ActivityLogin.class));
-                finish();
+                updateUI();
             }
         });
 
@@ -135,6 +134,12 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             editTextEmailView.requestFocus();
             return;
         }
+        if ( !Patterns.EMAIL_ADDRESS.matcher(email).matches() )
+        {
+            editTextEmailView.setError("Format email salah");
+            editTextEmailView.requestFocus();
+            return;
+        }
         if ( username.isEmpty() )
         {
             editTextUsername.setError("Masukkan nama");
@@ -147,53 +152,78 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             editTextPasswordView.requestFocus();
             return;
         }
-        if ( passwordVal.isEmpty() )
-        {
-            editTextPasswordValidation.setError("Masukkan validasi password");
-            editTextPasswordValidation.requestFocus();
-            return;
-        }
-        if ( !Patterns.EMAIL_ADDRESS.matcher(email).matches() )
-        {
-            editTextEmailView.setError("Format email salah");
-            editTextEmailView.requestFocus();
-            return;
-        }
         if ( password.length() < 6 )
         {
             editTextPasswordView.setError("Password minimal 6 karakter");
             editTextPasswordView.requestFocus();
             return;
         }
-        if ( !password.equals(passwordVal) )
+        if ( passwordVal.isEmpty() )
+        {
+            editTextPasswordValidation.setError("Masukkan validasi password");
+            editTextPasswordValidation.requestFocus();
+            return;
+        }
+        if ( !password.equals( passwordVal) )
         {
             editTextPasswordValidation.setError("Password dan validasi password tidak sama");
             editTextPasswordValidation.requestFocus();
             return;
         }
 
+        progressBar.setVisibility(View.VISIBLE);
 
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI();
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException)
+                            {
+                                Toast.makeText(ActivityDaftarAkun.this,  "Akun Anda sudah pernah terdaftar.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI();
+                            }
+                            else
+                            {
+                                Toast.makeText(ActivityDaftarAkun.this,  "Gagal mendaftar. Coba periksa koneksi Anda.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        progressBar.setVisibility(View.GONE);
+                    }
+                });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
     }
 
-    private void updateUI(FirebaseUser user)
+    private void updateUI()
     {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        if(currentUser == null) {
+            Intent intent = new Intent(ActivityDaftarAkun.this, ActivityLogin.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        else
+        {
+            Intent intent = new Intent(ActivityDaftarAkun.this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
         }
-
-        getLoaderManager().initLoader(0, null, this);
     }
 
     private boolean mayRequestContacts() {
@@ -228,163 +258,6 @@ public class ActivityDaftarAkun extends AppCompatActivity implements LoaderCallb
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 populateAutoComplete();
             }
-        }
-    }
-
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this,
-                // Retrieve data rows for the device user's 'profile' contact.
-                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
-
-                // Select only email addresses.
-                ContactsContract.Contacts.Data.MIMETYPE +
-                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
-                .CONTENT_ITEM_TYPE},
-
-                // Show primary email addresses first. Note that there won't be
-                // a primary email address if the user hasn't specified one.
-                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        List<String> emails = new ArrayList<>();
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            emails.add(cursor.getString(ProfileQuery.ADDRESS));
-            cursor.moveToNext();
-        }
-
-        addEmailsToAutoComplete(emails);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
-    }
-
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(ActivityDaftarAkun.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        editTextEmailView.setAdapter(adapter);
-    }
-
-
-    private interface ProfileQuery {
-        String[] PROJECTION = {
-                ContactsContract.CommonDataKinds.Email.ADDRESS,
-                ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
-        };
-
-        int ADDRESS = 0;
-        int IS_PRIMARY = 1;
-    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                editTextPasswordView.setError(getString(R.string.error_incorrect_password));
-                editTextPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
         }
     }
 }

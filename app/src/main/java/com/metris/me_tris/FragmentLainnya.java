@@ -1,7 +1,11 @@
 package com.metris.me_tris;
 
-import android.app.Fragment;
+//<<<<<<< HEAD
+//import android.app.Fragment;
 import android.content.Intent;
+//=======
+import android.support.v4.app.Fragment;
+//>>>>>>> b7dac3a12688fee19f20d4c4df515c79cc9d7671
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;

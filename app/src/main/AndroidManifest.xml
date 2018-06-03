@@ -36,7 +36,6 @@
             android:name=".ActivityDaftarAkun"
             android:label="@string/title_activity_daftar_akun">
         </activity>
-
     </application>
 
 </manifest>

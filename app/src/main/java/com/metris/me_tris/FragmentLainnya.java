@@ -34,7 +34,6 @@ public class FragmentLainnya extends Fragment {
                 Intent intent = new Intent(getActivity(), ActivityLogin.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-//                getActivity().finish();
             }
         });
 

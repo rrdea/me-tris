@@ -10,15 +10,15 @@ import android.support.design.widget.BottomNavigationView;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.SignInButton;
-=======
->>>>>>> b7dac3a12688fee19f20d4c4df515c79cc9d7671
+//=======
+//>>>>>>> b7dac3a12688fee19f20d4c4df515c79cc9d7671
 
 public class HomeActivity extends AppCompatActivity {
 

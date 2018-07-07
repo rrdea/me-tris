@@ -1,32 +1,15 @@
 package com.metris.me_tris;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Patterns;
-import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
+import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,12 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
-public class ActivityLogin extends AppCompatActivity {
+public class FragmentAuthenication_Login extends Fragment {
     // UI references.
     private FirebaseAuth mAuth;
     private TextView textViewDaftarAkunbutt;
@@ -54,16 +33,22 @@ public class ActivityLogin extends AppCompatActivity {
     private EditText editTextPassword;
     private ProgressBar progressBar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    View view;
 
-        textViewDaftarAkunbutt = (TextView) findViewById(R.id.textviewLogin_daftar);
-        buttonLogin = (Button) findViewById(R.id.email_sign_in_button);
-        editTextEmail = (AutoCompleteTextView) findViewById(R.id.email);
-        editTextPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.login_progress);
+    public FragmentAuthenication_Login() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_fragment_authenication__login, container, false);
+
+        textViewDaftarAkunbutt = (TextView) view.findViewById(R.id.textviewLogin_daftar);
+        buttonLogin = (Button) view.findViewById(R.id.email_sign_in_button);
+        editTextEmail = (AutoCompleteTextView) view.findViewById(R.id.email);
+        editTextPassword = (EditText) view.findViewById(R.id.password);
+        progressBar = (ProgressBar) view.findViewById(R.id.login_progress);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -74,19 +59,16 @@ public class ActivityLogin extends AppCompatActivity {
             }
         });
 
-        textViewDaftarAkunbutt.setOnClickListener(new TextView.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityLogin.this, ActivityDaftarAkun.class));
-            }
-        });
+        // Inflate the layout for this fragment
+        return view;
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         updateUI(mAuth.getCurrentUser());
     }
+
 
     private void login()
     {
@@ -130,12 +112,12 @@ public class ActivityLogin extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(getApplicationContext(), task.getException().getMessage(),
+                            Toast.makeText(getContext().getApplicationContext(), task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                         }
                         progressBar.setVisibility(View.GONE);
                     }
-        });
+                });
 
     }
 
@@ -143,10 +125,9 @@ public class ActivityLogin extends AppCompatActivity {
     {
         if (user != null)
         {
-            Intent intent = new Intent(ActivityLogin.this, HomeActivity.class);
+            Intent intent = new Intent(getContext(), HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     }
 }
-

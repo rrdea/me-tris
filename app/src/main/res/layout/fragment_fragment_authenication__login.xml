@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    tools:context=".ActivityDaftarAkun">
-
-    <!-- signup progress -->
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".FragmentAuthenication_Login">
 
     <LinearLayout
         android:id="@+id/login_logo"
@@ -26,17 +24,17 @@
 
     </LinearLayout>
 
+
     <ScrollView
-        android:id="@+id/daftar_form"
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/email_daftar_form"
+            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -47,29 +45,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColorHint="@color/colorWhite"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <AutoCompleteTextView
-                    android:id="@+id/username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_username"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />
@@ -94,36 +69,14 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/validate_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password_ulangi"
-                    android:imeActionId="6"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:shadowColor="@color/colorAccent"/>
-
-            </android.support.design.widget.TextInputLayout>
-
-
             <Button
-                android:id="@+id/buton_daftar"
+                android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/action_daftar"
-                android:textStyle="bold"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorWhite"/>
+                android:text="@string/action_sign_in_short"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -134,20 +87,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Sudah punya akun? "
+                    android:text="Belum punya akun? "
                     />
 
                 <TextView
-                    android:id="@+id/textviewDaftar_login"
+                    android:id="@+id/textviewLogin_daftar"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Login"
+                    android:text="Daftar"
                     />
 
             </LinearLayout>
 
+            <!-- Login progress -->
             <ProgressBar
-                android:id="@+id/daftar_progress"
+                android:id="@+id/login_progress"
                 style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,6 +109,8 @@
                 android:visibility="gone"
                 android:layout_gravity="center"/>
 
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

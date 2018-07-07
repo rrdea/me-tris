@@ -31,7 +31,7 @@ public class FragmentLainnya extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(), ActivityLogin.class);
+                Intent intent = new Intent(getActivity(), ActivityAuthentication.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

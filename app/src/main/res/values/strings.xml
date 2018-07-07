@@ -17,6 +17,7 @@
     <string name="permission_rationale">Contacts permissions are needed for providing email completions.</string>
     <string name="title_activity_lupa_password">ActivityLupaPassword</string>
     <string name="title_activity_daftar_akun">Daftar Akun</string>
+    <string name="title_activity_authentication">Masuk dan Daftar</string>
 
     <string name="_0812345678">0812345678</string>
     <string name="masukkan_6_digit_kode">Masukkan 6 digit kode</string>
@@ -39,5 +40,8 @@
     <string name="tab_text_2">Trip Sebelumnya</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

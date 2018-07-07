@@ -22,29 +22,31 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class FragmentAuthenication_Login extends Fragment {
+public class FragmentAuthentication_Login extends Fragment {
     // UI references.
     private FirebaseAuth mAuth;
     private Button buttonLogin;
     private AutoCompleteTextView editTextEmail;
     private EditText editTextPassword;
     private ProgressBar progressBar;
+    private TextView textViewForgot;
 
     View view;
 
-    public FragmentAuthenication_Login() {
+    public FragmentAuthentication_Login() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_authenication__login, container, false);
+        view = inflater.inflate(R.layout.fragment_authentication_login, container, false);
 
         buttonLogin = (Button) view.findViewById(R.id.email_sign_in_button);
         editTextEmail = (AutoCompleteTextView) view.findViewById(R.id.email);
         editTextPassword = (EditText) view.findViewById(R.id.password);
         progressBar = (ProgressBar) view.findViewById(R.id.login_progress);
+        textViewForgot = (TextView) view.findViewById(R.id.textViewForgotButton);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +54,13 @@ public class FragmentAuthenication_Login extends Fragment {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        textViewForgot.setOnClickListener(new TextView.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ActivityResetPassword.class));
             }
         });
 

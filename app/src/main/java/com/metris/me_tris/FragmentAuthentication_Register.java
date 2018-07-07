@@ -12,7 +12,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,7 +48,7 @@ public class FragmentAuthentication_Register extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_authentication__register, container, false);
+        view = inflater.inflate(R.layout.fragment_authentication_register, container, false);
 
         editTextEmailView = (AutoCompleteTextView) view.findViewById(R.id.email);
         editTextPasswordView = (EditText) view.findViewById(R.id.password);

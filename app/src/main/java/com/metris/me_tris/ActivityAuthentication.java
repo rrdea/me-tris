@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.animation.RotateAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,11 @@ public class ActivityAuthentication extends AppCompatActivity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewPagerAuth);
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentAuthenication_Login(), "LOGIN");
+        adapter.addFragment(new FragmentAuthentication_Login(), "LOGIN");
         adapter.addFragment(new FragmentAuthentication_Register(), "REGISTER");
         viewPager.setAdapter(adapter);
+
+//        getWindow().setBackgroundDrawableResource(R.drawable.bg_login);
 
         TabLayout tabs = (TabLayout) findViewById(R.id.tabAuthentication);
         tabs.setupWithViewPager(viewPager);

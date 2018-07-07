@@ -1,8 +1,6 @@
 package com.metris.me_tris;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -27,7 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class FragmentAuthenication_Login extends Fragment {
     // UI references.
     private FirebaseAuth mAuth;
-    private TextView textViewDaftarAkunbutt;
     private Button buttonLogin;
     private AutoCompleteTextView editTextEmail;
     private EditText editTextPassword;
@@ -42,9 +39,8 @@ public class FragmentAuthenication_Login extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_fragment_authenication__login, container, false);
+        view = inflater.inflate(R.layout.fragment_authenication__login, container, false);
 
-        textViewDaftarAkunbutt = (TextView) view.findViewById(R.id.textviewLogin_daftar);
         buttonLogin = (Button) view.findViewById(R.id.email_sign_in_button);
         editTextEmail = (AutoCompleteTextView) view.findViewById(R.id.email);
         editTextPassword = (EditText) view.findViewById(R.id.password);

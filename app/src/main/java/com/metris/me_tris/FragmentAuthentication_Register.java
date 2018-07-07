@@ -1,8 +1,6 @@
 package com.metris.me_tris;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -39,7 +37,6 @@ public class FragmentAuthentication_Register extends Fragment {
     private ProgressBar progressBar;
     private Button buttonDaftar;
 
-    private TextView tvLogin;
     private FirebaseAuth mAuth;
 
     private View view;
@@ -52,25 +49,18 @@ public class FragmentAuthentication_Register extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_fragment_authentication__register, container, false);
+        view = inflater.inflate(R.layout.fragment_authentication__register, container, false);
 
         editTextEmailView = (AutoCompleteTextView) view.findViewById(R.id.email);
         editTextPasswordView = (EditText) view.findViewById(R.id.password);
         editTextPasswordValidation = (EditText) view.findViewById(R.id.validate_password);
         editTextUsername =(AutoCompleteTextView) view.findViewById(R.id.username);
         buttonDaftar = (Button) view.findViewById(R.id.buton_daftar);
-        tvLogin = view.findViewById(R.id.textviewDaftar_login);
 
         progressBar = view.findViewById(R.id.daftar_progress);
 
         mAuth = FirebaseAuth.getInstance();
 
-        tvLogin.setOnClickListener(new TextView.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                updateUI();
-            }
-        });
 
         buttonDaftar.setOnClickListener(new Button.OnClickListener(){
             @Override

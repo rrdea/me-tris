@@ -20,5 +20,15 @@
     <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">#ecf0f1</item>
+        <item name="colorControlHighlight">#27ae60</item>
+        <item name="colorControlActivated">#27ae60</item>
+        <item name="android:paddingTop">20sp</item>
+        <item name="android:paddingBottom">20sp</item>
+        <item name="android:paddingLeft">5sp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
 </resources>

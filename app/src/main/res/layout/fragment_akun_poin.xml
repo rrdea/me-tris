@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp">
+    <LinearLayout
+        android:id="@+id/login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/poin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/jumlah_poin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:textColor="@color/gray"
+                android:typeface="sans"
+
+                android:text="1000"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:theme="@style/EditTextTheme"/>
+
+        </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:listitem="@layout/row_view_poin"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

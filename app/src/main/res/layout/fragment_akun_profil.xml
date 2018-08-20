@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp">
+    <LinearLayout
+        android:id="@+id/login_logo"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:orientation="vertical">
+
+       </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/daftar_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/profil_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_horizontal_margin">
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false">
+
+                <AutoCompleteTextView
+                    android:id="@+id/notelpProfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray"
+                    android:typeface="sans"
+
+                    android:text="08129311212"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:theme="@style/EditTextTheme"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false">
+
+                <AutoCompleteTextView
+                    android:id="@+id/passProfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/listbutton"
+
+
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+
+
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/gray"
+                    android:typeface="sans"
+
+                    android:text="saijfapja"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="15dp"
+                    android:theme="@style/EditTextTheme"/>
+
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false">
+
+                <AutoCompleteTextView
+                    android:id="@+id/notelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="nama user"
+
+                    android:textSize="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:theme="@style/EditTextTheme" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false">
+
+                <EditText
+                    android:id="@+id/alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="jalan.sjbofasbaos"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:textSize="15dp"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:theme="@style/EditTextTheme"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+
+
+
+            <Button
+                android:id="@+id/buton_edit"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Edit"
+                android:textStyle="bold"
+                android:background="@drawable/roundedbutton"
+                android:textColor="@color/colorWhite" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

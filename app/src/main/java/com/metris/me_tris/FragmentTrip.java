@@ -28,10 +28,10 @@ public class FragmentTrip extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_trip,container, false);
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPagerTrip);
+        View view = inflater.inflate(R.layout.fragment_akun,container, false);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPagerAkun);
         setupViewPager(viewPager);
-        TabLayout tabs = (TabLayout) view.findViewById(R.id.tabTrip);
+        TabLayout tabs = (TabLayout) view.findViewById(R.id.tabProfil);
         tabs.setupWithViewPager(viewPager);
 
         return view;
@@ -41,8 +41,8 @@ public class FragmentTrip extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
 
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(new FragmentTrip_Mendatang(), "Mendatang");
-        adapter.addFragment(new FragmentTrip_Sebelumnya(), "Sebelumnya");
+        adapter.addFragment(new FragmentTrip_Profil(), "Profil");
+        adapter.addFragment(new FragmentTrip_Poin(), "Poin");
         viewPager.setAdapter(adapter);
 
     }
